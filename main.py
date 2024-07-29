@@ -1,5 +1,4 @@
-from address_book import AddressBook
-
+from storage import FileStorage
 import handler
 
 def parse_input(user_input):
@@ -8,7 +7,8 @@ def parse_input(user_input):
     return cmd, *args
 
 def main():
-    book = AddressBook()
+    storage = FileStorage()
+    book = storage.load_data()
 
     print("Welcome to the assistant bot!")
     while True:
@@ -16,6 +16,7 @@ def main():
             user_input = input("Enter a command: ")
         except KeyboardInterrupt:
             print("Good bye!")
+            storage.save_data(book)
             break
 
         if not user_input:
@@ -25,6 +26,7 @@ def main():
         match command:
             case "close" | "exit":
                 print("Good bye!")
+                storage.save_data(book)
                 break
             case "hello":
                 print("How can I help you?")
