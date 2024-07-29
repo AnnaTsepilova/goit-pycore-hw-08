@@ -1,10 +1,10 @@
 import pickle
-from address_book import AddressBook
 
 class FileStorage():
-    '''Class for file storage handler base on pickle'''
-    def __init__(self, filename: str = "addressbook.pkl"):
+    '''Class for file storage handler based on pickle'''
+    def __init__(self, storage_object, filename: str = "addressbook.pkl"):
         self.filename = filename
+        self.storage_object = storage_object
 
     def save_data(self, book):
         '''Save object to file'''
@@ -17,4 +17,4 @@ class FileStorage():
             with open(self.filename, "rb") as fh:
                 return pickle.load(fh)
         except FileNotFoundError:
-            return AddressBook()
+            return self.storage_object()

@@ -1,4 +1,5 @@
 from storage import FileStorage
+from address_book import AddressBook
 import handler
 
 def parse_input(user_input):
@@ -7,7 +8,7 @@ def parse_input(user_input):
     return cmd, *args
 
 def main():
-    storage = FileStorage()
+    storage = FileStorage(AddressBook)
     book = storage.load_data()
 
     print("Welcome to the assistant bot!")
